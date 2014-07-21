@@ -1,5 +1,6 @@
+
 /*-------------------------------------------------------------------------------------*/
-/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version 3.6.2        */
+/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version (3.6.2.beta)*/
 /*                                                                                     */
 /*  Copyright (C) 2001-2012  Mark Abramson        - the Boeing Company, Seattle        */
 /*                           Charles Audet        - Ecole Polytechnique, Montreal      */
@@ -34,62 +35,50 @@
 /*  You can find information on the NOMAD software at www.gerad.ca/nomad               */
 /*-------------------------------------------------------------------------------------*/
 /**
-  \file   L_Curve.cpp
-  \brief  L_CURVE_TARGET stopping criterion (implementation)
-  \author Sebastien Le Digabel
-  \date   2010-04-09
-  \see    L_Curve.hpp
-*/
-#include "L_Curve.hpp"
+ \file   Multi_Obj_Quad_Model_Evaluator.hpp
+ \brief  NOMAD::Mulit_Obj_Evaluator subclass for quadratic model optimization (headers)
+ \author Christophe Tribes 
+ \date   2012-06-19
+ \see    Multi_Obj_Quad_Model_Evaluator.cpp
+ */
+#ifndef __MULTI_OBJ_QUAD_MODEL_EVALUATOR__
+#define __MULTI_OBJ_QUAD_MODEL_EVALUATOR__
 
-/*-----------------------------------------------*/
-/*          insertion of a pair bbe/f            */
-/*-----------------------------------------------*/
-void NOMAD::L_Curve::insert ( int bbe , const NOMAD::Double & f )
-{
-  if ( _f.empty() ) {   
-    _f.push_back   ( f );
-    _bbe.push_back (bbe);
-  }
-  else {
-    size_t nm1 = _bbe.size()-1;
-    if ( _bbe[nm1] == bbe )
-      _f[nm1] = f;
-    else {
-      _f.push_back   ( f );
-      _bbe.push_back (bbe);
-    }
-  }
-}
+#include "Quad_Model_Evaluator.hpp"
+#include "Multi_Obj_Evaluator.hpp"
 
-/*---------------------------------------------------------------*/
-/*         check the L_CURVE_TARGET stopping criterion           */
-/*  returns true if it detects that the target won't be reached  */
-/*  after bbe evaluations)                                       */
-/*---------------------------------------------------------------*/
-bool NOMAD::L_Curve::check_stop ( int bbe ) const
-{
-  // we check the p last successes and approximate the L-curve
-  // with a line joining the extremities:
-  const size_t p = 7;
-
-  if ( _f.size() >= p ) {
+namespace NOMAD {
 	
-    size_t n = _f.size();
-    
-    NOMAD::Double f2 = _f[n-1];
-    if ( f2 <= _target )
-      return false;
-    
-    size_t       nmp = n-p;
-    int         bbe1 = _bbe [ nmp ];
-    NOMAD::Double f1 = _f   [ nmp ];
-    NOMAD::Double  a = ( f2 - f1 ) / ( bbe - bbe1 );
-    NOMAD::Double  b = f1 - a * bbe1;
-    int   bbe_target = static_cast<int> ( ceil ( ( ( _target - b ) / a ).value() ) );
-    
-    // test: if ( bbe_target > bbe+(bbe-bbe1) )
-    return ( bbe_target > 2*bbe - bbe1 );
-  }
-  return false;
+	/// Bi-objective NOMAD::Evaluator subclass for quadratic model.
+	class Multi_Obj_Quad_Model_Evaluator : public NOMAD::Quad_Model_Evaluator, public NOMAD::Multi_Obj_Evaluator {     		
+	public:
+		
+		/// Constructor.
+		/**
+		 \param p     Parameters -- \b IN.
+		 \param model Model      -- \b IN.
+		 */
+		Multi_Obj_Quad_Model_Evaluator ( const NOMAD::Parameters & p     ,
+										const NOMAD::Quad_Model & model   ) : NOMAD::Quad_Model_Evaluator(p,model),NOMAD::Multi_Obj_Evaluator(p) {_is_model_evaluator=true;}
+		
+		/// Destructor.
+		virtual ~Multi_Obj_Quad_Model_Evaluator ( void ){;}
+		
+		
+		///  Evaluate the blackboxes quad model at a given trial point
+		/**
+		 \param x          point to evaluate     -- \b IN/OUT.
+		 \param h_max      h_max for barrier     -- \b IN.
+		 \param count_eval Count eval if true    -- \b IN.
+		 \return A boolean equal to \c false if the evaluation failed.
+		 */	
+		virtual bool eval_x ( NOMAD::Eval_Point   & x          ,
+							 const NOMAD::Double & h_max      ,
+							 bool                & count_eval   ) const {return Quad_Model_Evaluator::eval_x(x,h_max,count_eval);}
+		
+		
+	};
 }
+
+#endif
+

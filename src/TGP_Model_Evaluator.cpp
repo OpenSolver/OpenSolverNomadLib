@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------------------------------*/
 /*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version 3.6.2        */
 /*                                                                                     */
-/*  Copyright (C) 2001-2012  Mark Abramson        - the Boeing Company, Seattle        */
+/*  Copyright (C) 2001-2012 Mark Abramson        - the Boeing Company, Seattle        */
 /*                           Charles Audet        - Ecole Polytechnique, Montreal      */
 /*                           Gilles Couture       - Ecole Polytechnique, Montreal      */
 /*                           John Dennis          - Rice University, Houston           */
@@ -34,62 +34,32 @@
 /*  You can find information on the NOMAD software at www.gerad.ca/nomad               */
 /*-------------------------------------------------------------------------------------*/
 /**
-  \file   L_Curve.cpp
-  \brief  L_CURVE_TARGET stopping criterion (implementation)
+  \file   TGP_Model_Evaluator.cpp
+  \brief  NOMAD::Evaluator subclass for TGP model optimization (implementation)
   \author Sebastien Le Digabel
-  \date   2010-04-09
-  \see    L_Curve.hpp
+  \date   2011-02-17
+  \see    TGP_Mopel_Evaluator.hpp
 */
-#include "L_Curve.hpp"
 
-/*-----------------------------------------------*/
-/*          insertion of a pair bbe/f            */
-/*-----------------------------------------------*/
-void NOMAD::L_Curve::insert ( int bbe , const NOMAD::Double & f )
+#ifndef USE_TGP
+
+int TGP_MODEL_EVALUATOR_DUMMY; // avoids that TGP_Model_Evaluator.o has no symbols with ranlib
+
+#else
+
+#include "TGP_Model_Evaluator.hpp"
+
+/*------------------------------------------------------------------------*/
+/*                evaluate the TGP model at a given trial point           */
+/*------------------------------------------------------------------------*/
+bool NOMAD::TGP_Model_Evaluator::eval_x ( NOMAD::Eval_Point   & x          ,
+					  const NOMAD::Double & h_max      ,
+					  bool                & count_eval   ) const
 {
-  if ( _f.empty() ) {   
-    _f.push_back   ( f );
-    _bbe.push_back (bbe);
-  }
-  else {
-    size_t nm1 = _bbe.size()-1;
-    if ( _bbe[nm1] == bbe )
-      _f[nm1] = f;
-    else {
-      _f.push_back   ( f );
-      _bbe.push_back (bbe);
-    }
-  }
+  count_eval = true;
+  if ( !_model.predict ( x , true ) )
+    return false;
+  return true;
 }
 
-/*---------------------------------------------------------------*/
-/*         check the L_CURVE_TARGET stopping criterion           */
-/*  returns true if it detects that the target won't be reached  */
-/*  after bbe evaluations)                                       */
-/*---------------------------------------------------------------*/
-bool NOMAD::L_Curve::check_stop ( int bbe ) const
-{
-  // we check the p last successes and approximate the L-curve
-  // with a line joining the extremities:
-  const size_t p = 7;
-
-  if ( _f.size() >= p ) {
-	
-    size_t n = _f.size();
-    
-    NOMAD::Double f2 = _f[n-1];
-    if ( f2 <= _target )
-      return false;
-    
-    size_t       nmp = n-p;
-    int         bbe1 = _bbe [ nmp ];
-    NOMAD::Double f1 = _f   [ nmp ];
-    NOMAD::Double  a = ( f2 - f1 ) / ( bbe - bbe1 );
-    NOMAD::Double  b = f1 - a * bbe1;
-    int   bbe_target = static_cast<int> ( ceil ( ( ( _target - b ) / a ).value() ) );
-    
-    // test: if ( bbe_target > bbe+(bbe-bbe1) )
-    return ( bbe_target > 2*bbe - bbe1 );
-  }
-  return false;
-}
+#endif

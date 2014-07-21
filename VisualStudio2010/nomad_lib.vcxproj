@@ -195,6 +195,10 @@
     <ClCompile Include="..\src\Slave.cpp" />
     <ClCompile Include="..\src\Speculative_Search.cpp" />
     <ClCompile Include="..\src\Stats.cpp" />
+    <ClCompile Include="..\src\TGP_Model.cpp" />
+    <ClCompile Include="..\src\TGP_Model_Evaluator.cpp" />
+    <ClCompile Include="..\src\TGP_Model_Search.cpp" />
+    <ClCompile Include="..\src\TGP_Output_Model.cpp" />
     <ClCompile Include="..\src\utils.cpp" />
     <ClCompile Include="..\src\Variable_Group.cpp" />
     <ClCompile Include="..\src\VNS_Search.cpp" />

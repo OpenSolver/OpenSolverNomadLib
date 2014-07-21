@@ -1,5 +1,5 @@
 /*-------------------------------------------------------------------------------------*/
-/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version 3.5.1        */
+/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version 3.6.2        */
 /*                                                                                     */
 /*  Copyright (C) 2001-2012  Mark Abramson        - the Boeing Company, Seattle        */
 /*                           Charles Audet        - Ecole Polytechnique, Montreal      */
@@ -144,12 +144,13 @@ void NOMAD::Slave::run ( void ) const
 
     // RESULT signal:
     // --------------
-    else if ( signal == NOMAD::RESULT_SIGNAL ) {
+    else if ( signal == NOMAD::RESULT_SIGNAL )
+	{
 
       // send the evaluation result to the master:
       send_eval_result ( x , count_eval );
 
-      delete x;
+	  delete x;
       x = NULL;
     }
 

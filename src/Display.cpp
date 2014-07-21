@@ -1,5 +1,5 @@
 /*-------------------------------------------------------------------------------------*/
-/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version 3.5.1        */
+/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version 3.6.2        */
 /*                                                                                     */
 /*  Copyright (C) 2001-2012  Mark Abramson        - the Boeing Company, Seattle        */
 /*                           Charles Audet        - Ecole Polytechnique, Montreal      */
@@ -306,6 +306,9 @@ std::string NOMAD::Display::get_display_stats_keyword ( NOMAD::display_stats_typ
   case NOMAD::DS_BBE:
     s = "BBE";
     break;
+  case NOMAD::DS_BLK_EVA:
+    s = "BLK_EVA";
+    break;
   case NOMAD::DS_SGTE:
     s = "SGTE";
     break;
@@ -518,20 +521,26 @@ std::ostream & NOMAD::operator << ( std::ostream & out , NOMAD::eval_type et )
 /*-----------------------------------------------------------------*/
 std::ostream & NOMAD::operator << ( std::ostream & out , NOMAD::eval_status_type est )
 {
-  switch ( est ) {
-  case NOMAD::EVAL_FAIL:
-    out << "fail";
-    break;
-  case NOMAD::EVAL_OK:
-    out << "ok";
-    break;
-  case NOMAD::EVAL_IN_PROGRESS:
-    out << "in progress";
-    break;
-  case NOMAD::UNDEFINED_STATUS:
-    out << "undefined";
-  }
-  return out;
+	switch ( est )
+	{
+		case NOMAD::EVAL_FAIL:
+			out << "fail";
+			break;
+		case NOMAD::EVAL_OK:
+			out << "ok";
+			break;
+		case NOMAD::EVAL_IN_PROGRESS:
+			out << "in progress";
+			break;
+		case NOMAD::UNDEFINED_STATUS:
+			out << "undefined";
+			break;
+		case NOMAD::EVAL_USER_REJECT:
+			out << "rejected";
+			break;
+			
+	}
+	return out;
 }
 
 /*-----------------------------------------------------------------*/
@@ -746,9 +755,15 @@ std::ostream & NOMAD::operator << ( std::ostream          & out ,
   case NOMAD::ORTHO_2:
     out << "Ortho-MADS 2";
     break;
-  case NOMAD::ORTHO_NP1:
-    out << "Ortho-MADS n+1";
+  case NOMAD::ORTHO_NP1_QUAD:
+    out << "Ortho-MADS n+1 QUAD";
     break;
+  case NOMAD::ORTHO_NP1_NEG:
+   out << "Ortho-MADS n+1 NEG";
+  break;
+  case NOMAD::DYN_ADDED:
+	out << "Dynamic n+1th direction";
+	break;
   case NOMAD::ORTHO_2N:
     out << "Ortho-MADS 2n";
     break;
@@ -794,6 +809,9 @@ std::ostream & NOMAD::operator << ( std::ostream          & out ,
   case NOMAD::UNDEFINED_DIRECTION:
     out << "undefined";
     break;
+  case NOMAD::PROSPECT_DIR:
+		  out << "Prospect direction";
+		  break;
   }
   return out;
 }

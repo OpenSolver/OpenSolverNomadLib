@@ -1,5 +1,5 @@
 /*-------------------------------------------------------------------------------------*/
-/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version 3.5.1        */
+/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version 3.6.2        */
 /*                                                                                     */
 /*  Copyright (C) 2001-2012  Mark Abramson        - the Boeing Company, Seattle        */
 /*                           Charles Audet        - Ecole Polytechnique, Montreal      */
@@ -47,6 +47,8 @@
 
 namespace NOMAD {
 
+
+	
   /// Class describing a polling direction.
   class Direction : public NOMAD::Point {
 
@@ -59,6 +61,7 @@ namespace NOMAD {
 
     NOMAD::direction_type _type;   ///< Type of direction.
     mutable int           _index;  ///< Direction index (used only for display).
+	size_t					  _dir_group_index ; ///< Index a the group of direction
 
   public:
 
@@ -84,9 +87,19 @@ namespace NOMAD {
        \param n Dimension                         -- \b IN.
        \param v Initial value for all coordinates -- \b IN.
        \param type Type of direction              -- \b IN.
+	   \param dir_group_index Index of the variable group the direction belongs   --\b IN.
     */
-    Direction ( int n , const NOMAD::Double & v , NOMAD::direction_type type );
+    Direction ( int n , const NOMAD::Double & v , NOMAD::direction_type type, int dir_group_index );  
 
+	  /// Constructor #2b.
+	  /**
+       \param n Dimension                         -- \b IN.
+       \param v Initial value for all coordinates -- \b IN.
+       \param type Type of direction              -- \b IN.
+	   */
+	  Direction ( int n , const NOMAD::Double & v , NOMAD::direction_type type);
+	  
+	  
     /// Constructor #3.
     /**
        \param x    Coordinates       -- \b IN.
@@ -151,6 +164,13 @@ namespace NOMAD {
     */
     int get_index ( void ) const { return _index; }
 
+	  /// Access to the direction group index.
+	  /**
+       \return The direction group index.
+	   */
+	  size_t get_dir_group_index ( void ) const { return _dir_group_index; }
+	  
+	  
     /// Check if the direction is a MADS direction.
     /**
        \return A boolean equal to \c true if the direction is a MADS direction.
