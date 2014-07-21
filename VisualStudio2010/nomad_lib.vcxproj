@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FBB640B4-E68B-4EBA-B49C-3EC485FB488E}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>nomad_lib</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <TargetName>libnomad</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <TargetName>libnomad</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>libnomad-debug</TargetName>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>libnomad-debug</TargetName>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(TargetDir)*.lib" "$(SolutionDir)..\..\OpenSolverNomadDll\NOMADLib32\" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(TargetDir)*.lib" "$(SolutionDir)..\..\OpenSolverNomadDll\NOMADLib64\" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(TargetDir)*.lib" "$(SolutionDir)..\..\OpenSolverNomadDll\NOMADLib32\" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(TargetDir)*.lib" "$(SolutionDir)..\..\OpenSolverNomadDll\NOMADLib64\" /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Barrier.cpp" />
+    <ClCompile Include="..\src\Cache.cpp" />
+    <ClCompile Include="..\src\Cache_File_Point.cpp" />
+    <ClCompile Include="..\src\Cache_Point.cpp" />
+    <ClCompile Include="..\src\Cache_Search.cpp" />
+    <ClCompile Include="..\src\Clock.cpp" />
+    <ClCompile Include="..\src\Direction.cpp" />
+    <ClCompile Include="..\src\Directions.cpp" />
+    <ClCompile Include="..\src\Display.cpp" />
+    <ClCompile Include="..\src\Double.cpp" />
+    <ClCompile Include="..\src\Evaluator.cpp" />
+    <ClCompile Include="..\src\Evaluator_Control.cpp" />
+    <ClCompile Include="..\src\Eval_Point.cpp" />
+    <ClCompile Include="..\src\Exception.cpp" />
+    <ClCompile Include="..\src\Extended_Poll.cpp" />
+    <ClCompile Include="..\src\LH_Search.cpp" />
+    <ClCompile Include="..\src\L_Curve.cpp" />
+    <ClCompile Include="..\src\Mads.cpp" />
+    <ClCompile Include="..\src\Mesh.cpp" />
+    <ClCompile Include="..\src\Model_Sorted_Point.cpp" />
+    <ClCompile Include="..\src\Model_Stats.cpp" />
+    <ClCompile Include="..\src\Multi_Obj_Evaluator.cpp" />
+    <ClCompile Include="..\src\Parameters.cpp" />
+    <ClCompile Include="..\src\Parameter_Entries.cpp" />
+    <ClCompile Include="..\src\Parameter_Entry.cpp" />
+    <ClCompile Include="..\src\Pareto_Front.cpp" />
+    <ClCompile Include="..\src\Pareto_Point.cpp" />
+    <ClCompile Include="..\src\Phase_One_Evaluator.cpp" />
+    <ClCompile Include="..\src\Phase_One_Search.cpp" />
+    <ClCompile Include="..\src\Point.cpp" />
+    <ClCompile Include="..\src\Priority_Eval_Point.cpp" />
+    <ClCompile Include="..\src\Quad_Model.cpp" />
+    <ClCompile Include="..\src\Quad_Model_Evaluator.cpp" />
+    <ClCompile Include="..\src\Quad_Model_Search.cpp" />
+    <ClCompile Include="..\src\Random_Pickup.cpp" />
+    <ClCompile Include="..\src\RNG.cpp" />
+    <ClCompile Include="..\src\Signature.cpp" />
+    <ClCompile Include="..\src\Slave.cpp" />
+    <ClCompile Include="..\src\Speculative_Search.cpp" />
+    <ClCompile Include="..\src\Stats.cpp" />
+    <ClCompile Include="..\src\utils.cpp" />
+    <ClCompile Include="..\src\Variable_Group.cpp" />
+    <ClCompile Include="..\src\VNS_Search.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Barrier.hpp" />
+    <ClInclude Include="..\src\Cache.hpp" />
+    <ClInclude Include="..\src\Cache_File_Point.hpp" />
+    <ClInclude Include="..\src\Cache_Point.hpp" />
+    <ClInclude Include="..\src\Cache_Search.hpp" />
+    <ClInclude Include="..\src\Clock.hpp" />
+    <ClInclude Include="..\src\defines.hpp" />
+    <ClInclude Include="..\src\Direction.hpp" />
+    <ClInclude Include="..\src\Directions.hpp" />
+    <ClInclude Include="..\src\Display.hpp" />
+    <ClInclude Include="..\src\Double.hpp" />
+    <ClInclude Include="..\src\Evaluator.hpp" />
+    <ClInclude Include="..\src\Evaluator_Control.hpp" />
+    <ClInclude Include="..\src\Eval_Point.hpp" />
+    <ClInclude Include="..\src\Exception.hpp" />
+    <ClInclude Include="..\src\Extended_Poll.hpp" />
+    <ClInclude Include="..\src\Filter_Point.hpp" />
+    <ClInclude Include="..\src\LH_Search.hpp" />
+    <ClInclude Include="..\src\L_Curve.hpp" />
+    <ClInclude Include="..\src\Mads.hpp" />
+    <ClInclude Include="..\src\Mesh.hpp" />
+    <ClInclude Include="..\src\Model_Sorted_Point.hpp" />
+    <ClInclude Include="..\src\Model_Stats.hpp" />
+    <ClInclude Include="..\src\Multi_Obj_Evaluator.hpp" />
+    <ClInclude Include="..\src\nomad.hpp" />
+    <ClInclude Include="..\src\Parameters.hpp" />
+    <ClInclude Include="..\src\Parameter_Entries.hpp" />
+    <ClInclude Include="..\src\Parameter_Entry.hpp" />
+    <ClInclude Include="..\src\Pareto_Front.hpp" />
+    <ClInclude Include="..\src\Pareto_Point.hpp" />
+    <ClInclude Include="..\src\Phase_One_Evaluator.hpp" />
+    <ClInclude Include="..\src\Phase_One_Search.hpp" />
+    <ClInclude Include="..\src\Point.hpp" />
+    <ClInclude Include="..\src\Priority_Eval_Point.hpp" />
+    <ClInclude Include="..\src\Quad_Model.hpp" />
+    <ClInclude Include="..\src\Quad_Model_Evaluator.hpp" />
+    <ClInclude Include="..\src\Quad_Model_Search.hpp" />
+    <ClInclude Include="..\src\Random_Pickup.hpp" />
+    <ClInclude Include="..\src\RNG.hpp" />
+    <ClInclude Include="..\src\Search.hpp" />
+    <ClInclude Include="..\src\Set_Element.hpp" />
+    <ClInclude Include="..\src\Signature.hpp" />
+    <ClInclude Include="..\src\Signature_Element.hpp" />
+    <ClInclude Include="..\src\Slave.hpp" />
+    <ClInclude Include="..\src\Speculative_Search.hpp" />
+    <ClInclude Include="..\src\Stats.hpp" />
+    <ClInclude Include="..\src\TGP_Model.hpp" />
+    <ClInclude Include="..\src\TGP_Model_Evaluator.hpp" />
+    <ClInclude Include="..\src\TGP_Model_Search.hpp" />
+    <ClInclude Include="..\src\TGP_Output_Model.hpp" />
+    <ClInclude Include="..\src\Uncopyable.hpp" />
+    <ClInclude Include="..\src\utils.hpp" />
+    <ClInclude Include="..\src\Variable_Group.hpp" />
+    <ClInclude Include="..\src\VNS_Search.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
