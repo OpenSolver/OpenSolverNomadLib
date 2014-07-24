@@ -1,3 +1,7 @@
+# Mac build files
+Mac/builds/
+Mac/lib/
+
 # Created by http://www.gitignore.io
 
 ### VisualStudio ###

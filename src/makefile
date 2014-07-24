@@ -1,20 +1,20 @@
-EXE                    = ../bin/nomad
-EXE_MPI		           = ../bin/nomad.MPI
-LIB                    = ../lib/nomad.a
-LIB_MPI                = ../lib/nomad.MPI.a
+EXE                    = ../Mac/bin/nomad
+EXE_MPI		       = ../Mac/bin/nomad.MPI
+LIB                    = ../Mac/lib/nomad.a
+LIB_MPI                = ../Mac/lib/nomad.MPI.a
 COMPILATOR             = g++
 COMPILATOR_MPI = mpic++
 SUNAME = $(shell uname)
 OSS=$(findstring MINGW32,$(SUNAME)) 
 ifneq "$(strip $(OSS))" ""
 COMPILATOR_MPI = g++
-EXE                    = ../bin/nomad.exe
-EXE_MPI		           = ../bin/nomad.MPI.exe
+EXE                    = ../Mac/bin/nomad.exe
+EXE_MPI		       = ../Mac/bin/nomad.MPI.exe
 endif
 
-BUILD_DIR_NO_MPI = ../builds/ObjsNoMPI 
-BUILD_DIR_MPI = ../builds/ObjsMPI
-BUILD_DIR = 
+BUILD_DIR_NO_MPI       = ../Mac/builds/ObjsNoMPI 
+BUILD_DIR_MPI          = ../Mac/builds/ObjsMPI
+BUILD_DIR              = 
 COMPILATOR_OPTIONS     = -O2 -ansi 
 # COMPILATOR_OPTIONS = -g -ansi -Wall 
 # COMPILATOR_OPTIONS_MPI  = $(COMPILATOR_OPTIONS) -DUSE_MPI
