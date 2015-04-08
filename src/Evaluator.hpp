@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------------------------------*/
-/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version 3.6.2        */
+/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version 3.7.1        */
 /*                                                                                     */
-/*  Copyright (C) 2001-2012  Mark Abramson        - the Boeing Company, Seattle        */
+/*  Copyright (C) 2001-2015  Mark Abramson        - the Boeing Company, Seattle        */
 /*                           Charles Audet        - Ecole Polytechnique, Montreal      */
 /*                           Gilles Couture       - Ecole Polytechnique, Montreal      */
 /*                           John Dennis          - Rice University, Houston           */
@@ -126,25 +126,37 @@ namespace NOMAD {
 		virtual ~Evaluator ( void ) {}
 		
 		/// Force quit (called by pressing ctrl-c).
-		static void force_quit ( void ) { NOMAD::Evaluator::_force_quit = true; }
+		static void force_quit ( void )
+        {
+            NOMAD::Evaluator::_force_quit = true;
+        }
 		
 		/// Access to the \c force_quit flag.
 		/**
 		 \return The \c force_quit flag.
 		 */
-		static bool get_force_quit ( void ) { return NOMAD::Evaluator::_force_quit; }
+		static bool get_force_quit ( void )
+        {
+            return NOMAD::Evaluator::_force_quit;
+        }
 		
 		/// Access to the multi-objective flag.
 		/**
 		 \return The multi-objective flag.
 		 */
-		bool is_multi_obj ( void ) const { return _is_multi_obj; }
+		bool is_multi_obj ( void ) const
+        {
+            return _is_multi_obj;
+        }
 
 		/// Access to the model evaluator flag.
 		/**
 		 \return The model evaluator flag.
 		 */
-		virtual bool is_model_evaluator ( void ) const { return _is_model_evaluator; }
+		virtual bool is_model_evaluator ( void ) const
+        {
+            return _is_model_evaluator;
+        }
 		
 		/// User pre-processing of a list of points.
 		/**

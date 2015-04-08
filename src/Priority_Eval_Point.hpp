@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------------------------------*/
-/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version 3.6.2        */
+/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version 3.7.1        */
 /*                                                                                     */
-/*  Copyright (C) 2001-2012  Mark Abramson        - the Boeing Company, Seattle        */
+/*  Copyright (C) 2001-2015  Mark Abramson        - the Boeing Company, Seattle        */
 /*                           Charles Audet        - Ecole Polytechnique, Montreal      */
 /*                           Gilles Couture       - Ecole Polytechnique, Montreal      */
 /*                           John Dennis          - Rice University, Houston           */
@@ -109,7 +109,7 @@ namespace NOMAD {
 		explicit Priority_Eval_Point ( const NOMAD::Eval_Point * x     ,
 									  const NOMAD::Double     & h_min   )
 		: NOMAD::Set_Element<NOMAD::Eval_Point> ( x     ) ,
-		_h_min									( h_min )  {}
+		_h_min                                ( h_min )  {}
 		
 		/// Copy constructor.
 		/**
@@ -123,7 +123,7 @@ namespace NOMAD {
 		_f_model                              ( pep._f_model            ) ,
 		_h_model                              ( pep._h_model            ) ,
 		_angle_success_dir                    ( pep._angle_success_dir  ) ,
-		_angle_simplex_grad                   ( pep._angle_simplex_grad ) {}
+		_angle_simplex_grad                   ( pep._angle_simplex_grad )   {}
 		
 		/// Destructor.
 		virtual ~Priority_Eval_Point ( void ) {}
@@ -146,7 +146,7 @@ namespace NOMAD {
 											NOMAD::Double & f_model            ,
 											NOMAD::Double & h_model            ,
 											NOMAD::Double & angle_success_dir  ,
-											NOMAD::Double & angle_simplex_grad  ) const
+											NOMAD::Double & angle_simplex_grad   ) const
 		{
 			f_sgte             = _f_sgte;
 			h_sgte             = _h_sgte;

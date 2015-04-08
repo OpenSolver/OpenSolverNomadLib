@@ -1,8 +1,8 @@
 
 /*-------------------------------------------------------------------------------------*/
-/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version (3.6.2.beta)*/
+/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version (3.7.0.beta)*/
 /*                                                                                     */
-/*  Copyright (C) 2001-2012  Mark Abramson        - the Boeing Company, Seattle        */
+/*  Copyright (C) 2001-2015  Mark Abramson        - the Boeing Company, Seattle        */
 /*                           Charles Audet        - Ecole Polytechnique, Montreal      */
 /*                           Gilles Couture       - Ecole Polytechnique, Montreal      */
 /*                           John Dennis          - Rice University, Houston           */
@@ -38,7 +38,7 @@
  \file   Multi_Obj_Quad_Model_Evaluator.hpp
  \brief  NOMAD::Mulit_Obj_Evaluator subclass for quadratic model optimization (headers)
  \author Christophe Tribes 
- \date   2012-06-19
+ \date   2014-06-19
  \see    Multi_Obj_Quad_Model_Evaluator.cpp
  */
 #ifndef __MULTI_OBJ_QUAD_MODEL_EVALUATOR__

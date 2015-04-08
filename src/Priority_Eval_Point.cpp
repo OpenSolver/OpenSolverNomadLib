@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------------------------------*/
-/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version 3.6.2        */
+/*  NOMAD - Nonlinear Optimization by Mesh Adaptive Direct search - version 3.7.1        */
 /*                                                                                     */
-/*  Copyright (C) 2001-2012  Mark Abramson        - the Boeing Company, Seattle        */
+/*  Copyright (C) 2001-2015  Mark Abramson        - the Boeing Company, Seattle        */
 /*                           Charles Audet        - Ecole Polytechnique, Montreal      */
 /*                           Gilles Couture       - Ecole Polytechnique, Montreal      */
 /*                           John Dennis          - Rice University, Houston           */
@@ -58,7 +58,7 @@ bool NOMAD::Priority_Eval_Point::dominates
     return false;
      const NOMAD::Eval_Point * x1 = get_element();
   const NOMAD::Eval_Point * x2 = x.get_element();
-	
+  
   // criterion 0: lexicographic order
 	if (_lexicographic_order)
 		return NOMAD::Point(*x1) < NOMAD::Point(*x2);
@@ -121,7 +121,7 @@ bool NOMAD::Priority_Eval_Point::dominates
   // ------------
   flag = compare_hf_values ( _h_sgte , _f_sgte , x_h_sgte , x_f_sgte );
   if ( flag )
-    return ( flag > 0 );
+      return ( flag > 0 );  
 
   // criterion 6: model f and h values:
   // ------------
@@ -140,8 +140,8 @@ bool NOMAD::Priority_Eval_Point::dominates
     if ( x_angle_success_dir < _angle_success_dir )
       return false;
   }
-	
 
+	
   // criterion 8: take the point with the best h value:
   // ------------
   flag = compare_h_values ( x1->get_h() , x2->get_h() );
@@ -172,8 +172,8 @@ bool NOMAD::Priority_Eval_Point::dominates
   }
 
 	// criterion 10: compare the tags:
-	// -------------
-	return x1->get_tag() < x2->get_tag();
+  // -------------
+  return x1->get_tag() < x2->get_tag();
 	
 }
 
