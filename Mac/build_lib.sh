@@ -6,4 +6,5 @@ cd ../src
 make
 
 # Copy to OpenSolverNomadDylib folder
-cp ../Mac/lib/nomad.a ../../OpenSolverNomadDylib/NOMADLib/libnomad.a
+cp ../Mac/lib/nomad.a ../../OpenSolverNomad/lib/osx/libnomad.a
+
